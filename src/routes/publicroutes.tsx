@@ -33,7 +33,7 @@ const PublicRoutes = () => (
     <Route path="/" element={<Homepage />} />
     <Route path="/about" element={<About />} />
     <Route path="/FAQ" element={<FAQ />} />
-    <Route path="/ContactPage" element={<ContactPage />} />
+    {/* <Route path="/ContactPage" element={<ContactPage />} /> */}
     <Route path="/Services" element={<Servicespage />} />
     <Route path="/UserRegistration" element={<UserRegistration />} />
     <Route path="/UserLogin" element={<UserLogin />} />

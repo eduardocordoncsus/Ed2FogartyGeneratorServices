@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { Box, Grid, Stack, Typography, CircularProgress } from "@mui/material";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/stockphoto.jpg";
 
 const API_BASE =
   import.meta.env.VITE_API_BASE_URL ?? "/api";
@@ -33,33 +33,44 @@ function About() {
   return (
     <>
       <Navbar />
-      <Grid
-        container
-        padding={15}
-        spacing={15}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Grid>
-          <Box
-            component="img"
-            src={logo}
-            alt="Logo"
-            sx={{ width: 200, height: 200 }}
-          />
+
+      <Box sx={{ px: { xs: 3, md: 10 }, py: { xs: 6, md: 12 } }}>
+        <Grid
+          container
+          spacing={{ xs: 4, md: 8 }}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Box
+              component="img"
+              src={logo}
+              alt="Generator service"
+              sx={{
+                width: "100%",
+                maxHeight: 460,
+                objectFit: "cover",
+                borderRadius: 2,
+                boxShadow: 3,
+                display: "block",
+              }}
+            />
+          </Grid>
+
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Stack spacing={3} maxWidth={560}>
+              <Typography variant="h4" fontWeight={700}>
+                Introduction
+              </Typography>
+
+              <Typography variant="h6" color="text.secondary" lineHeight={1.7}>
+                {text}
+              </Typography>
+            </Stack>
+          </Grid>
         </Grid>
-        <Grid>
-          <Stack spacing={5} maxWidth={500}>
-            <Typography variant="h4" fontWeight={700} gutterBottom>
-              Introduction
-            </Typography>
-            <Typography variant="h6" color="text.secondary">
-              {text}
-            </Typography>
-          </Stack>
-        </Grid>
-      </Grid>
+      </Box>
+
       <Footer />
     </>
   );

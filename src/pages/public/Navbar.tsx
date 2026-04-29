@@ -34,7 +34,7 @@ function Navbar() {
     { label: "Home", to: "/" },
     { label: "About", to: "/about" },
     { label: "Services", to: "/services" },
-    { label: "Contact", to: "/Contactpage" },
+    //{ label: "Contact", to: "/Contactpage" },
     { label: "FAQ", to: "/faq" },
     { label: "Reviews", to: "/ViewReviews" },
   ];

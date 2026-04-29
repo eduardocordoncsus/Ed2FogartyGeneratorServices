@@ -49,8 +49,8 @@ const ReviewReturns = () => {
         const fetchInitialData = async () => {
             try {
                 const [returnsRes, retentionRes] = await Promise.all([
-                    axios.get<ReturnRequest[]>("http://localhost:3000/api/returns"),
-                    axios.get("http://localhost:3000/api/pagecontent/returnRetentionDays")
+                    axios.get<ReturnRequest[]>("/api/returns"),
+                    axios.get("/api/pagecontent/returnRetentionDays")
                 ]);
                 
                 setReturns(returnsRes.data);
@@ -78,7 +78,7 @@ const ReviewReturns = () => {
             return;
         }
         try {
-            await axios.put("http://localhost:3000/api/pagecontent/returnRetentionDays", {
+            await axios.put("/api/pagecontent/returnRetentionDays", {
                 content: retentionDays
             });
             setRetentionSaved(true);
@@ -137,7 +137,7 @@ const ReviewReturns = () => {
         setOpenDeleteDialog(false);
 
         try {
-          await axios.delete(`http://localhost:3000/api/returns/${requestToDelete._id}`);
+          await axios.delete(`/api/returns/${requestToDelete._id}`);
 
           setReturns((prev) =>
               prev.filter((req) => req._id !== requestToDelete._id)
@@ -152,7 +152,7 @@ const ReviewReturns = () => {
 
     const handleUpdateRequest = async (request: ReturnRequest, state: string) => {
       try {
-        await axios.put("http://localhost:3000/api/returns/" + request._id, { 
+        await axios.put("/api/returns/" + request._id, { 
           status: state 
         });
 

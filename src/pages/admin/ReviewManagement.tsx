@@ -77,7 +77,7 @@ function ReviewManagement() {
       if (next) setSelectionModel((prev) => prev.filter((x) => x !== id));
 
       try {
-        const res = await fetch(`http://localhost:3000/api/reviews/${id}/verified`, {
+        const res = await fetch(`/api/reviews/${id}/verified`, {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -103,7 +103,7 @@ function ReviewManagement() {
     };
 
   const getReviews = async () => {
-    const res = await fetch("http://localhost:3000/api/reviews", {method: "GET"});
+    const res = await fetch("/api/reviews", {method: "GET"});
     // array of reviews is returned
     const data = await res.json();
     if (!res.ok) throw new Error(data.message);
@@ -149,7 +149,7 @@ function ReviewManagement() {
       // Fire deletes in parallel
       await Promise.all(
         selectedIds.map((id) =>
-          fetch(`http://localhost:3000/api/reviews/${id}`, {
+          fetch(`/api/reviews/${id}`, {
             method: "DELETE",
             credentials: "include",
           }).then(async (res) => {

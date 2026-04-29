@@ -4,7 +4,7 @@ import { Container, Grid, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 
 const API_BASE =
-  import.meta.env.VITE_API_BASE_URL ?? "http://localhost:3000/api";
+  import.meta.env.VITE_API_BASE_URL ?? "/api";
 
 function FAQ() {
   const [faqText, setFaqText] = useState("Loading...");

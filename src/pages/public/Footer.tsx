@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 
 const API_BASE =
-  import.meta.env.VITE_API_BASE_URL ?? "http://localhost:3000/api";
+  import.meta.env.VITE_API_BASE_URL ?? "/api";
 
 function Footer() {
   // Store the raw footer content from API

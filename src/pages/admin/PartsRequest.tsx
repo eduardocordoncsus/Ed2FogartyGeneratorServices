@@ -53,7 +53,7 @@ const PartsRequest = () => {
         const fetchPartRequests = async () => {
         try {
             const response = await axios.get<PartsRequest[]>(
-            "http://localhost:3000/api/partrequests"
+            "/api/partrequests"
             );
             setPartsRequests(response.data);
         } catch (err: any) {
@@ -112,7 +112,7 @@ const PartsRequest = () => {
 
         try {
           // API call to delete the request by ID
-          await axios.delete(`http://localhost:3000/api/partrequests/${requestToDelete._id}`);
+          await axios.delete(`/api/partrequests/${requestToDelete._id}`);
 
           // SUCCESS: Update the local state by filtering out the deleted user
           setPartsRequests((prevRequests) =>
@@ -133,7 +133,7 @@ const PartsRequest = () => {
       partRequest.status = state;
       try {
         // API call to update the request by ID
-        await fetch("http://localhost:3000/api/partrequests/" + partRequest._id, {
+        await fetch("/api/partrequests/" + partRequest._id, {
               method: "PUT",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({status: state}),

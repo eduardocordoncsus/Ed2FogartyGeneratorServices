@@ -62,7 +62,7 @@ const Login: React.FC = () => {
       const idToken = await firebaseUser.getIdToken();
 
 
-      const response = await fetch(`http://localhost:3000/api/users/me/${firebaseUser.uid}`, {
+      const response = await fetch(`/api/users/me/${firebaseUser.uid}`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${idToken}`, // Send the token to your middleware

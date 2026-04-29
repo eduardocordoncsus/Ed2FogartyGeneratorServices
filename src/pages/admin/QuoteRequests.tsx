@@ -66,8 +66,8 @@ export default function QuoteRequests() {
     setError(null);
     try {
       const [quotesRes, retentionRes] = await Promise.all([
-        fetch("http://localhost:3000/api/quotes", { credentials: "include" }),
-        fetch("http://localhost:3000/api/pagecontent/quoteRetentionDays", {
+        fetch("/api/quotes", { credentials: "include" }),
+        fetch("/api/pagecontent/quoteRetentionDays", {
           credentials: "include",
         }),
       ]);
@@ -123,7 +123,7 @@ export default function QuoteRequests() {
     );
     try {
       const res = await fetch(
-        `http://localhost:3000/api/quotes/${id}/acknowledge`,
+        `/api/quotes/${id}/acknowledge`,
         {
           method: "PATCH", // if PATCH isn’t available, change to POST and add matching route
           headers: { "Content-Type": "application/json" },
@@ -149,7 +149,7 @@ export default function QuoteRequests() {
 
     setRows((prev) => prev.filter((r) => r._id !== id));
     try {
-      const res = await fetch(`http://localhost:3000/api/quotes/${id}`, {
+      const res = await fetch(`/api/quotes/${id}`, {
         method: "DELETE", // if PATCH isn’t available, change to POST and add matching route
         credentials: "include",
       });
@@ -263,7 +263,7 @@ export default function QuoteRequests() {
     }
     try {
       const res = await fetch(
-        "http://localhost:3000/api/pagecontent/quoteRetentionDays",
+        "/api/pagecontent/quoteRetentionDays",
         {
           method: "PUT",
           credentials: "include",

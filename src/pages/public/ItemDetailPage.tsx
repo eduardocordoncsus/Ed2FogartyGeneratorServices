@@ -32,7 +32,7 @@ export default function ItemDetailPage() {
   const api = useMemo(
     () =>
       axios.create({
-        baseURL: import.meta.env.VITE_API_BASE_URL ?? "http://localhost:3000/api",
+        baseURL: import.meta.env.VITE_API_BASE_URL ?? "/api",
         withCredentials: true,
       }),
     []
@@ -63,8 +63,8 @@ export default function ItemDetailPage() {
       try {
         const endpoint =
           type === "generator"
-            ? `http://localhost:3000/api/generators/${id}`
-            : `http://localhost:3000/api/parts/${id}`;
+            ? `/api/generators/${id}`
+            : `/api/parts/${id}`;
 
         const res = await fetch(endpoint);
         if (!res.ok) throw new Error("Not found");

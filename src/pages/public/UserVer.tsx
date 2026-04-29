@@ -36,7 +36,7 @@ const UserVer = () => {
         await applyActionCode(auth, actionCode).then(async (resp) => {
           // Email address has been verified and changed in Firebase.
           // Change email in mongodb
-          await fetch("http://localhost:3000/api/users/ver/" + oldEmail, {
+          await fetch("/api/users/ver/" + oldEmail, {
             method: "PUT",
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify({newData}),  

@@ -89,7 +89,7 @@ export default function ReviewedAppointments() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/appointments/reviewed");
+        const res = await fetch("/api/appointments/reviewed");
         const data = await res.json();
         if (!res.ok) throw new Error(data.message || "Failed to load appointments");
 
@@ -113,7 +113,7 @@ export default function ReviewedAppointments() {
       const token = await auth.currentUser?.getIdToken();
       if (!token) throw new Error("Not authenticated");
 
-      const res = await fetch(`http://localhost:3000/api/appointments/${id}`, {
+      const res = await fetch(`/api/appointments/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

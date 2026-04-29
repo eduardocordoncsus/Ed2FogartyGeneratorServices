@@ -23,7 +23,7 @@ import ForgotPassword from "./ForgotPassword";
 import { Link } from "react-router-dom";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL ?? "http://localhost:3000/api",
+  baseURL: import.meta.env.VITE_API_BASE_URL ?? "/api",
   withCredentials: true, // not using cookies yet; set true when JWT cookies
 });
 

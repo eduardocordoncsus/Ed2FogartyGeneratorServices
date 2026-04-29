@@ -5,7 +5,7 @@ import { Box, Grid, Stack, Typography, CircularProgress } from "@mui/material";
 import logo from "../../assets/logo.png";
 
 const API_BASE =
-  import.meta.env.VITE_API_BASE_URL ?? "http://localhost:3000/api";
+  import.meta.env.VITE_API_BASE_URL ?? "/api";
 
 function About() {
   const [text, setText] = useState("Loading...");

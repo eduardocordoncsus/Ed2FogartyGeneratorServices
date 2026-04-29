@@ -25,7 +25,7 @@ const AdminNavbar = () => {
       await signOut(firebaseAuth);
       // Optional: If you have a specific backend logout route, keep this. 
       // Otherwise, Firebase signOut is usually enough.
-      await fetch("http://localhost:3000/api/admins/logout", { method: "POST" });
+      await fetch("/api/admins/logout", { method: "POST" });
 
       setCurrentUser(null);
       navigate("/"); // Redirect to home/login after logout

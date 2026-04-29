@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 import { signInWithEmailAndPassword, updatePassword, reauthenticateWithCredential, EmailAuthProvider, verifyBeforeUpdateEmail, deleteUser } from "firebase/auth";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL ?? "http://localhost:3000/api",
+  baseURL: import.meta.env.VITE_API_BASE_URL ?? "/api",
   withCredentials: true,
 });
 
@@ -162,7 +162,7 @@ const UserSettings = () => {
         if (firebaseUser != null && currentUser) {
           const idToken = await firebaseUser.getIdToken();
           // delete databa
-          const response = await fetch("http://localhost:3000/api/users/" + currentUser.userID, {
+          const response = await fetch("/api/users/" + currentUser.userID, {
               method: "DELETE",
               headers: {
                 "Content-Type": "application/json",
@@ -524,7 +524,7 @@ const UserSettings = () => {
               const idToken = await firebaseUser.getIdToken();
 
               const response = await fetch(
-                "http://localhost:3000/api/users/" + currentUser.userID,
+                "/api/users/" + currentUser.userID,
                 {
                   method: "PUT",
                   headers: {
@@ -717,7 +717,7 @@ const UserSettings = () => {
                         const idToken = await firebaseUser.getIdToken();
 
                         const response = await fetch(
-                          "http://localhost:3000/api/users/" +
+                          "/api/users/" +
                             currentUser.userID,
                           {
                             method: "PUT",

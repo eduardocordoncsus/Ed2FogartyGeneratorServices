@@ -40,7 +40,7 @@ const CreateGen: React.FC = () => {
       const formData = new FormData();
       formData.append("image", file);
 
-      const uploadResponse = await fetch("http://localhost:3000/api/upload", {
+      const uploadResponse = await fetch("/api/upload", {
         method: "POST",
         body: formData,
       });
@@ -82,7 +82,7 @@ const CreateGen: React.FC = () => {
       const slot3 = await uploadImageIfNeeded(imageFile3, manualImageUrl3);
       const slot4 = await uploadImageIfNeeded(imageFile4, manualImageUrl4);
       const slot5 = await uploadImageIfNeeded(imageFile5, manualImageUrl5);
-      const response = await fetch("http://localhost:3000/api/generators", {
+      const response = await fetch("/api/generators", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

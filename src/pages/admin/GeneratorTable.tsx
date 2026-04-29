@@ -153,7 +153,7 @@ const uploadImageIfNeeded = async (
     const formData = new FormData();
     formData.append("image", file);
 
-    const uploadResponse = await fetch("http://localhost:3000/api/upload", {
+    const uploadResponse = await fetch("/api/upload", {
       method: "POST",
       body: formData,
     });
@@ -204,7 +204,7 @@ const handleSavePictures = async () => {
     const slot3 = await uploadImageIfNeeded(file3, manualImage3, editingRow.image3, editingRow.imageKey3);
     const slot4 = await uploadImageIfNeeded(file4, manualImage4, editingRow.image4, editingRow.imageKey4);
     const slot5 = await uploadImageIfNeeded(file5, manualImage5, editingRow.image5, editingRow.imageKey5);
-    const res = await fetch(`http://localhost:3000/api/generators/${editingRow.id}`, {
+    const res = await fetch(`/api/generators/${editingRow.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -277,7 +277,7 @@ const handleCloseDelete = () => {
   const getGens = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/api/generators");
+      const res = await fetch("/api/generators");
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
 
@@ -341,7 +341,7 @@ const handleCloseDelete = () => {
 
 const saveStock = async (id: string, Serial_Number: string, description: string, name: string, stock: number, image: string, image2: string, image3: string) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/generators/${id}`, {
+    const res = await fetch(`/api/generators/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ Stock: stock, Image_Url: image,Image_Url2: image2, Image_Url3: image3, Serial_Number: Serial_Number, Description: description, name: name}) 
@@ -563,7 +563,7 @@ const handleDeleteRows = async () => {
     await Promise.all(
       ids.map(async (genId) => {
         const res = await fetch(
-          `http://localhost:3000/api/generators/${genId}`,
+          `/api/generators/${genId}`,
           { method: "DELETE" }
         );
 

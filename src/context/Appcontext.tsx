@@ -50,7 +50,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           const token = await firebaseUser.getIdToken();
 
           // 2. Fetch the full profile from MongoDB
-          const res = await axios.get(`http://localhost:3000/api/users/me/${firebaseUser.uid}`, {
+          const res = await axios.get(`/api/users/me/${firebaseUser.uid}`, {
             headers: { Authorization: `Bearer ${token}` }
           });
 

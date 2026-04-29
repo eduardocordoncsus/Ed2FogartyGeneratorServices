@@ -152,7 +152,7 @@ const uploadImageIfNeeded = async (
     const formData = new FormData();
     formData.append("image", file);
 
-    const uploadResponse = await fetch("http://localhost:3000/api/upload", {
+    const uploadResponse = await fetch("/api/upload", {
       method: "POST",
       body: formData,
     });
@@ -203,7 +203,7 @@ const handleSavePictures = async () => {
     const slot3 = await uploadImageIfNeeded(file3, manualImage3, editingRow.image3, editingRow.imageKey3);
     const slot4 = await uploadImageIfNeeded(file4, manualImage4, editingRow.image4, editingRow.imageKey4);
     const slot5 = await uploadImageIfNeeded(file5, manualImage5, editingRow.image5, editingRow.imageKey5);
-    const res = await fetch(`http://localhost:3000/api/parts/${editingRow.id}`, {
+    const res = await fetch(`/api/parts/${editingRow.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -277,7 +277,7 @@ const handleSavePictures = async () => {
   const getParts = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/api/parts");
+      const res = await fetch("/api/parts");
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
 
@@ -370,7 +370,7 @@ const handleSavePictures = async () => {
 
 ) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/parts/${id}`, {
+    const res = await fetch(`/api/parts/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -431,7 +431,7 @@ const handleSavePictures = async () => {
     try {
       await Promise.all(
         ids.map(async (partId) => {
-          const res = await fetch(`http://localhost:3000/api/parts/${partId}`, {
+          const res = await fetch(`/api/parts/${partId}`, {
             method: "DELETE",
           });
 

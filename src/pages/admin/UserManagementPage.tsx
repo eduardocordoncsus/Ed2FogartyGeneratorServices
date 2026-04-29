@@ -70,7 +70,7 @@ const UserManagementPage = () => {
     setLoading(true);
     try {
       const headers = await getAuthHeaders();
-      const response = await axios.get<User[]>("http://localhost:3000/api/users", { headers });
+      const response = await axios.get<User[]>("/api/users", { headers });
       setUsers(response.data);
       setError(null);
     } catch (err: any) {
@@ -86,7 +86,7 @@ const UserManagementPage = () => {
       const headers = await getAuthHeaders();
       // This sends the update to your backend
       await axios.patch(
-        `http://localhost:3000/api/users/${userId}/role`,
+        `/api/users/${userId}/role`,
         { role: newRole },
         { headers }
       );
@@ -119,7 +119,7 @@ const UserManagementPage = () => {
     try {
       const headers = await getAuthHeaders();
       // Only call your own API. The backend handles the rest.
-      await axios.delete(`http://localhost:3000/api/users/${userToDelete._id}`, { headers });
+      await axios.delete(`/api/users/${userToDelete._id}`, { headers });
 
       // Update local state only after a confirmed success
       setUsers((prevUsers) => prevUsers.filter((u) => u._id !== userToDelete._id));

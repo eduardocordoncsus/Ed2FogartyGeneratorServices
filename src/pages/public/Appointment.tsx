@@ -37,7 +37,7 @@ function Appointment() {
   const [busyRanges, setBusyRanges] = useState<{start: dayjs.Dayjs, end: dayjs.Dayjs}[]>([]);
   const [loadingSlots, setLoadingSlots] = useState(false);
 
-  const api = useMemo(() => axios.create({ baseURL: "http://localhost:3000/api" }), []);
+  const api = useMemo(() => axios.create({ baseURL: "/api" }), []);
 
   const timeSlots = useMemo(() => {
     const slots = [];

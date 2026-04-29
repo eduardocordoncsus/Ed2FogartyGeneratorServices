@@ -30,7 +30,7 @@ function Returns() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   
 
-  const api = useMemo(() => axios.create({ baseURL: "http://localhost:3000/api" }), []);
+  const api = useMemo(() => axios.create({ baseURL: "/api" }), []);
 
   useEffect(() => {
     const interceptorId = api.interceptors.request.use(async (config) => {

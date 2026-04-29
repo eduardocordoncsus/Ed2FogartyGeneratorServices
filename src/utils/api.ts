@@ -1,7 +1,7 @@
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
 
-const BASE_URL = "http://localhost:3000/api";
+const BASE_URL = "/api";
 
 // Make sure 'export' is at the very beginning of the const
 export const apiRequest = async (endpoint: string, options: RequestInit = {}) => {

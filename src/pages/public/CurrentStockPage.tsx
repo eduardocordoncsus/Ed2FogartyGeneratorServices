@@ -59,7 +59,7 @@ function CurrentStockPage() {
  const api = useMemo(
   () =>
     axios.create({
-      baseURL: import.meta.env.VITE_API_BASE_URL ?? "http://localhost:3000/api",
+      baseURL: import.meta.env.VITE_API_BASE_URL ?? "/api",
       withCredentials: true,
     }),
   []
@@ -109,7 +109,7 @@ const favoriteSet = new Set(
 
   // Fetch Generators
   useEffect(() => {
-    fetch("http://localhost:3000/api/generators")
+    fetch("/api/generators")
       .then((res) => res.json())
       .then((data) => setGenerators(data))
       .catch((err) => console.error("Error fetching generators:", err));
@@ -117,7 +117,7 @@ const favoriteSet = new Set(
 
   // Fetch Parts
   useEffect(() => {
-    fetch("http://localhost:3000/api/parts")
+    fetch("/api/parts")
       .then((res) => res.json())
       .then((data) => setParts(data))
       .catch((err) => console.error("Error fetching parts:", err));

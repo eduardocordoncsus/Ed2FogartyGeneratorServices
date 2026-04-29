@@ -46,7 +46,7 @@ export default function AppointmentRequest() {
   const [busyRanges, setBusyRanges] = useState<{ start: dayjs.Dayjs; end: dayjs.Dayjs }[]>([]);
   const [travelCost, setTravelCost] = useState<string>("");
 
-  const api = useMemo(() => axios.create({ baseURL: "http://localhost:3000/api" }), []);
+  const api = useMemo(() => axios.create({ baseURL: "/api" }), []);
 
 
   const timeSlots = useMemo(() => {
@@ -307,7 +307,7 @@ export default function AppointmentRequest() {
 
 
   const deleteAppointmentOnServer = async (id: string) => {
-    const res = await fetch(`http://localhost:3000/api/appointments/${id}`, {
+    const res = await fetch(`/api/appointments/${id}`, {
       method: "DELETE",
       credentials: "include",
     });
@@ -401,7 +401,7 @@ export default function AppointmentRequest() {
     payload.newEndAppointmentTime = endIso;
     }
 
-    await fetch(`http://localhost:3000/api/appointments/${id}/status`, {
+    await fetch(`/api/appointments/${id}/status`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -426,7 +426,7 @@ export default function AppointmentRequest() {
         setLoading(true);
         setError(null);
 
-        const res = await fetch("http://localhost:3000/api/appointments", {
+        const res = await fetch("/api/appointments", {
           credentials: "include",
         });
 
@@ -967,7 +967,7 @@ export default function AppointmentRequest() {
                     throw new Error("Time conflicts with an existing schedule.");
                   }
 
-                  const res = await fetch("http://localhost:3000/api/appointments/admin-create", {
+                  const res = await fetch("/api/appointments/admin-create", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     credentials: "include",

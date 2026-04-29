@@ -74,7 +74,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchCount = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/appointments/pending-count");
+        const response = await fetch("/api/appointments/pending-count");
 
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -95,7 +95,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchCount = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/quotes/pending-quotes");
+        const response = await fetch("/api/quotes/pending-quotes");
 
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -116,7 +116,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchCount = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/partrequests/pending-parts");
+        const response = await fetch("/api/partrequests/pending-parts");
 
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -138,7 +138,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchAppoint = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/appointments/reviewed");
+        const res = await fetch("/api/appointments/reviewed");
         const data = await res.json();
         if (!res.ok) throw new Error(data.message || "Failed to load appointments");
 
@@ -176,7 +176,7 @@ const Dashboard = () => {
 
   // useEffect and table for reviews
     const getReviews = async () => {
-      const res = await fetch("http://localhost:3000/api/reviews", {method: "GET"});
+      const res = await fetch("/api/reviews", {method: "GET"});
       // array of reviews is returned
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);

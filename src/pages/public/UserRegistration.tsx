@@ -152,7 +152,7 @@ const UserRegistration: React.FC = () => {
       };
       const idToken = await firebaseUser.getIdToken();
       // 4. Send the data to your Node.js API
-      const response = await fetch("http://localhost:3000/api/users", {
+      const response = await fetch("/api/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -20,7 +20,6 @@ import partRoute from '../routes/part.route.js';
 const PORT = process.env.PORT || 3000
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const serviceAccount = JSON.parse(readFileSync(`${__dirname}/serviceAccountKey.json`, "utf8"));
 
 admin.initializeApp();
 

@@ -22,9 +22,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const serviceAccount = JSON.parse(readFileSync(`${__dirname}/serviceAccountKey.json`, "utf8"));
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
+admin.initializeApp();
 
 console.log("Firebase Admin Initialized successfully.");
 app.use(cors()); // Enable CORS for all routes

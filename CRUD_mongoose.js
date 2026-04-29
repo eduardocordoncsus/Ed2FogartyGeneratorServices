@@ -37,7 +37,6 @@ app.use(express.json()); // Fixes the 400 Bad Request error
 app.use(cookieParser());
 
 // Serve static files from the 'public' folder (from your server.js logic)
-app.use(express.static(path.join(__dirname, 'dist')));
 
 // --- Routes ---
 app.use('/api/admins', adminRoute);
@@ -55,7 +54,11 @@ app.use('/api/returns', returnsRoute);
 app.use('/api/invoices', invoiceRoute);
 app.use('/api/invoice-products', invoiceProductRoute);
 
+app.use(express.static(path.join(__dirname, "dist")));
 
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 
 // --- 404 Catch-all (Added from your server.js) ---
 app.use((req, res) => {

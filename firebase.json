@@ -1,4 +1,15 @@
 {
+  "projectId": "fogarty-onsite-generator",
+  "emulators": {
+    "auth": {
+      "port": 9099
+    },
+    "ui": {
+      "enabled": true,
+      "port": 4000
+    },
+    "singleProjectMode": true
+  },
   "hosting": {
     "public": "dist",
     "ignore": [
@@ -9,25 +20,12 @@
     "rewrites": [
       {
         "source": "/api/**",
-        "function": {
-          "functionId": "api",
-          "region": "us-central1"
-        }
+        "function": "api"
       },
       {
-        "source": "**",
+        "source": "/index.html",
         "destination": "/index.html"
       }
     ]
-  },
-  "emulators": {
-    "auth": {
-      "port": 9099
-    },
-    "ui": {
-      "enabled": true,
-      "port": 4000
-    },
-    "singleProjectMode": true
   }
 }

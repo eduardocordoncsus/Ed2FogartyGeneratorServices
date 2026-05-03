@@ -2,6 +2,7 @@ import express from "express";
 import Manufacturer from '../models/manufacturer.model.js';
 const router = express.Router();
 import {getManufacturers, getManufacturer, createManufacturer, updateManufacturer, deleteManufacturer} from '../controller/manufacturer.controller.js';
+import { verifyFirebaseToken } from '../backend/middleware/auth.ts';
 
 
 

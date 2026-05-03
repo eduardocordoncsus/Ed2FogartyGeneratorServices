@@ -7,10 +7,11 @@ import {
     updateReturn, 
     deleteReturn
 } from '../controller/returns.controller.js';
+import { verifyFirebaseToken } from '../backend/middleware/auth.ts';
 
 const router = express.Router();
 
-router.get('/', getReturn);
+router.get('/', verifyFirebaseToken, getReturn);
 router.get("/pending-returns", getPendingReturnCount); 
 router.post("/", createReturn);
 router.put("/:id", updateReturn);

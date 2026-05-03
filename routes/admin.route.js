@@ -1,5 +1,7 @@
 import express from "express";
 import Admin from '../models/admin.model.js';
+import { verifyFirebaseToken } from '../backend/middleware/auth.ts';
+
 const router = express.Router();
 import {getAdmins, getAdmin, createAdmin, updateAdmin, deleteAdmin, loginAdmin, checkAuth, logoutAdmin, } from '../controller/admin.controller.js';
 
@@ -13,7 +15,7 @@ router.post('/login', loginAdmin);
 
 router.post("/logout", logoutAdmin);
 
-router.get("/", getAdmins);
+router.get("/", verifyFirebaseToken, getAdmins);
 
 router.get("/:id", getAdmin);
 

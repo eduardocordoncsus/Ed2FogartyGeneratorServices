@@ -11,7 +11,7 @@ router.post("/admin-create", verifyFirebaseToken, adminCreateAppointment);
 router.get("/reviewed", getReviewedAppointments);
 router.get("/pending-count", getPendingCount);
 router.get("/user/:userID", getUserAppointments);
-router.get("/", getAppointments);
+router.get("/", verifyFirebaseToken, getAppointments);
 router.get("/:id", getAppointment);
 router.post("/", createAppointment);
 router.put("/:id", updateAppointment);

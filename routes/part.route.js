@@ -4,9 +4,10 @@ const router = express.Router();
 import {getParts, getPart, createPart, updatePart, deletePart} from '../controller/part.controller.js';
 import multer from 'multer';
 import path from 'path';
+import { verifyFirebaseToken } from '../backend/middleware/auth.ts';
 
 
-router.get('/', getParts);
+router.get('/', verifyFirebaseToken, getParts);
 
 router.get("/:id",getPart);
 

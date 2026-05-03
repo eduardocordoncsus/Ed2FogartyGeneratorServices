@@ -20,6 +20,7 @@ function Homepage() {
             </Typography>
             <Typography variant="h6" color="text.secondary">
               Reliable generator installation, maintenance, and repair services you can trust.
+              This is a example of a change to demostrate updating the website. Please ignore this change.
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>

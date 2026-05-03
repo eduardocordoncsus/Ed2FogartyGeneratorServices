@@ -15,7 +15,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { DataGrid, type GridColDef, type GridRowSelectionModel } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
 import noImage from "../../assets/logo.png";
-import { auth } from "../../firebase";
 
 
 interface GeneratorRow {
@@ -125,12 +124,6 @@ function GeneratorTable() {
   ids: new Set(),
 });
 
-  const getAuthHeaders = async () => {
-        const user = auth.currentUser;
-        if (!user) throw new Error("No authenticated user found");
-        const token = await user.getIdToken();
-        return { Authorization: `Bearer ${token}` };
-      };
 const openPictureEditor = (row: GeneratorRow) => {
   setEditingRow(row);
 
@@ -160,9 +153,7 @@ const uploadImageIfNeeded = async (
     const formData = new FormData();
     formData.append("image", file);
 
-    const headers = await getAuthHeaders();
     const uploadResponse = await fetch("/api/upload", {
-      headers,
       method: "POST",
       body: formData,
     });

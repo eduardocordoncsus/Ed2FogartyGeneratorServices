@@ -18,20 +18,12 @@ import UndoIcon from "@mui/icons-material/Undo";
 import AdminNavbar from "./AdminNavbar";
 import dayjs from "dayjs";
 import Modal from "@mui/material/Modal";
-import { auth } from "../../firebase";
 
 const createdFromObjectId = (id?: string) => {
   if (!id || id.length < 8) return undefined;
   const seconds = parseInt(id.substring(0, 8), 16);
   return new Date(seconds * 1000).toISOString();
 };
-
-  const getAuthHeaders = async () => {
-        const user = auth.currentUser;
-        if (!user) throw new Error("No authenticated user found");
-        const token = await user.getIdToken();
-        return { Authorization: `Bearer ${token}` };
-      };
 
 const modalStyling = {
   position: "absolute",
@@ -73,12 +65,10 @@ export default function QuoteRequests() {
     setLoading(true);
     setError(null);
     try {
-      const headers = await getAuthHeaders();
       const [quotesRes, retentionRes] = await Promise.all([
-        fetch("/api/quotes", { credentials: "include", headers }),
+        fetch("/api/quotes", { credentials: "include" }),
         fetch("/api/pagecontent/quoteRetentionDays", {
           credentials: "include",
-          headers,
         }),
       ]);
 
@@ -132,13 +122,11 @@ export default function QuoteRequests() {
       prev.map((r) => (r._id === id ? { ...r, acknowledged: next } : r)),
     );
     try {
-      const token = await auth.currentUser?.getIdToken();
-                  if (!token) throw new Error("Not authenticated");
       const res = await fetch(
         `/api/quotes/${id}/acknowledge`,
         {
           method: "PATCH", // if PATCH isn’t available, change to POST and add matching route
-          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+          headers: { "Content-Type": "application/json" },
           credentials: "include",
           body: JSON.stringify({ acknowledged: next }),
         },
@@ -161,9 +149,7 @@ export default function QuoteRequests() {
 
     setRows((prev) => prev.filter((r) => r._id !== id));
     try {
-      const headers = await getAuthHeaders();
       const res = await fetch(`/api/quotes/${id}`, {
-        headers,
         method: "DELETE", // if PATCH isn’t available, change to POST and add matching route
         credentials: "include",
       });

@@ -7,7 +7,7 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { auth as firebaseAuth } from "../../firebase";
 import { signOut } from "firebase/auth";
 import { useAuth } from "../../context/Appcontext";
-import { auth } from "../../firebase"; 
+
 const SubmitButtonStyle: SxProps<Theme> = {
   width: "150px",
   height: "50px",

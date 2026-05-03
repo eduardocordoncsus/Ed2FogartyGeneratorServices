@@ -21,7 +21,6 @@ import uploadRoutes from "./routes/upload.route.js";
 import returnsRoute from "./routes/returns.route.js"
 import invoiceRoute from "./routes/invoice.route.js";
 import invoiceProductRoute from "./routes/product.route.js";
-import { verifyFirebaseToken } from './backend/middleware/auth.ts';
 
 dotenv.config();
 
@@ -40,20 +39,20 @@ app.use(cookieParser());
 // Serve static files from the 'public' folder (from your server.js logic)
 
 // --- Routes ---
-app.use('/api/admins',verifyFirebaseToken, adminRoute);
-app.use('/api/generators',verifyFirebaseToken, generatorRoute);
-app.use('/api/parts',verifyFirebaseToken, partRoute);
-app.use('/api/reviews', verifyFirebaseToken, reviewRoute);
-app.use('/api/users', verifyFirebaseToken, userRoute);
-app.use('/api/appointments', verifyFirebaseToken, appointmentRoute);
-app.use('/api/manufacturers', verifyFirebaseToken, manufacturerRoute);
-app.use('/api/quotes', verifyFirebaseToken, quoteRoute);
-app.use('/api/pagecontent', verifyFirebaseToken, pagecontentRoute);
-app.use('/api/partrequests', verifyFirebaseToken, partrequestRoute);
-app.use("/api/upload", verifyFirebaseToken, uploadRoutes);
-app.use('/api/returns', verifyFirebaseToken, returnsRoute);
-app.use('/api/invoices', verifyFirebaseToken, invoiceRoute);
-app.use('/api/invoice-products', verifyFirebaseToken, invoiceProductRoute);
+app.use('/api/admins', adminRoute);
+app.use('/api/generators', generatorRoute);
+app.use('/api/parts', partRoute);
+app.use('/api/reviews', reviewRoute);
+app.use('/api/users', userRoute);
+app.use('/api/appointments', appointmentRoute);
+app.use('/api/manufacturers', manufacturerRoute);
+app.use('/api/quotes', quoteRoute);
+app.use('/api/pagecontent', pagecontentRoute);
+app.use('/api/partrequests', partrequestRoute);
+app.use("/api/upload", uploadRoutes);
+app.use('/api/returns', returnsRoute);
+app.use('/api/invoices', invoiceRoute);
+app.use('/api/invoice-products', invoiceProductRoute);
 
 app.use(express.static(path.join(__dirname, "dist")));
 

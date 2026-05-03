@@ -4,7 +4,6 @@ import { Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogC
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import dayjs from "dayjs";
-import { auth } from "../../firebase";
 
 interface ReturnRequest {
   _id: string;
@@ -45,22 +44,13 @@ const ReviewReturns = () => {
     const [retentionSaved, setRetentionSaved] = useState(false);
     const [retentionError, setRetentionError] = useState<string | null>(null);
 
-        const getAuthHeaders = async () => {
-              const user = auth.currentUser;
-              if (!user) throw new Error("No authenticated user found");
-              const token = await user.getIdToken();
-              return { Authorization: `Bearer ${token}` };
-            };
-        
-
     // fetch returns and retention day amount
     useEffect(() => {
         const fetchInitialData = async () => {
             try {
-                const header = await getAuthHeaders();
                 const [returnsRes, retentionRes] = await Promise.all([
-                    axios.get<ReturnRequest[]>("/api/returns", { headers: header }),
-                    axios.get("/api/pagecontent/returnRetentionDays", { headers: header })
+                    axios.get<ReturnRequest[]>("/api/returns"),
+                    axios.get("/api/pagecontent/returnRetentionDays")
                 ]);
                 
                 setReturns(returnsRes.data);
@@ -88,9 +78,7 @@ const ReviewReturns = () => {
             return;
         }
         try {
-            const header = await getAuthHeaders();
             await axios.put("/api/pagecontent/returnRetentionDays", {
-                  headers: header,
                 content: retentionDays
             });
             setRetentionSaved(true);
@@ -149,8 +137,7 @@ const ReviewReturns = () => {
         setOpenDeleteDialog(false);
 
         try {
-          const header = await getAuthHeaders();
-          await axios.delete(`/api/returns/${requestToDelete._id}`, { headers: header });
+          await axios.delete(`/api/returns/${requestToDelete._id}`);
 
           setReturns((prev) =>
               prev.filter((req) => req._id !== requestToDelete._id)
@@ -165,10 +152,9 @@ const ReviewReturns = () => {
 
     const handleUpdateRequest = async (request: ReturnRequest, state: string) => {
       try {
-        const header = await getAuthHeaders();
         await axios.put("/api/returns/" + request._id, { 
           status: state 
-        }, { headers: header });
+        });
 
         setReturns(prev => prev.map(r => r._id === request._id ? { ...r, status: state } : r));
       } catch (err: any) {

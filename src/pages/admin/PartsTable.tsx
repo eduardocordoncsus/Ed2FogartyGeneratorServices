@@ -15,7 +15,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { DataGrid, type GridColDef, type GridRowSelectionModel } from '@mui/x-data-grid';
 import { useNavigate } from "react-router-dom";
 import noImage from "../../assets/logo.png";
-import { auth } from "../../firebase";
 
 
 interface PartRow {
@@ -124,13 +123,6 @@ function PartsTable() {
   ids: new Set(),
 });
 
-  const getAuthHeaders = async () => {
-        const user = auth.currentUser;
-        if (!user) throw new Error("No authenticated user found");
-        const token = await user.getIdToken();
-        return { Authorization: `Bearer ${token}` };
-      };
-
 const openPictureEditor = (row: PartRow) => {
     setEditingRow(row);
 
@@ -160,9 +152,7 @@ const uploadImageIfNeeded = async (
     const formData = new FormData();
     formData.append("image", file);
 
-    const headers = await getAuthHeaders();
     const uploadResponse = await fetch("/api/upload", {
-      headers,
       method: "POST",
       body: formData,
     });
@@ -380,11 +370,9 @@ const handleSavePictures = async () => {
 
 ) => {
   try {
-    const token = await auth.currentUser?.getIdToken();
-                  if (!token) throw new Error("Not authenticated");
     const res = await fetch(`/api/parts/${id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         Part_Name,
         Stock: stock,
@@ -441,12 +429,10 @@ const handleSavePictures = async () => {
     if (ids.length === 0) return;
 
     try {
-      const headers = await getAuthHeaders();
       await Promise.all(
         ids.map(async (partId) => {
           const res = await fetch(`/api/parts/${partId}`, {
             method: "DELETE",
-            headers: headers,
           });
 
           if (!res.ok) {

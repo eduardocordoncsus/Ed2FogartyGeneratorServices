@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebase";
 
 const CreateGen: React.FC = () => {
   const [genID, setGenid] = useState("");
@@ -8,6 +9,13 @@ const CreateGen: React.FC = () => {
   const [Description, setDescription] = useState("");
   const [Stock, setStock] = useState("");
   const [responseMsg, setResponseMsg] = useState("");
+
+    const getAuthHeaders = async () => {
+          const user = auth.currentUser;
+          if (!user) throw new Error("No authenticated user found");
+          const token = await user.getIdToken();
+          return { Authorization: `Bearer ${token}` };
+        };
 
   // slot 1
   const [imageFile1, setImageFile1] = useState<File | null>(null);
@@ -40,7 +48,9 @@ const CreateGen: React.FC = () => {
       const formData = new FormData();
       formData.append("image", file);
 
+      const headers = await getAuthHeaders();
       const uploadResponse = await fetch("/api/upload", {
+        headers,
         method: "POST",
         body: formData,
       });
@@ -82,9 +92,11 @@ const CreateGen: React.FC = () => {
       const slot3 = await uploadImageIfNeeded(imageFile3, manualImageUrl3);
       const slot4 = await uploadImageIfNeeded(imageFile4, manualImageUrl4);
       const slot5 = await uploadImageIfNeeded(imageFile5, manualImageUrl5);
+      const token = await auth.currentUser?.getIdToken();
+                  if (!token) throw new Error("Not authenticated");
       const response = await fetch("/api/generators", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({
           genID,
           name,

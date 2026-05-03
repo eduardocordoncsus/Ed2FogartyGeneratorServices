@@ -27,6 +27,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import Navbar from "../admin/AdminNavbar";
+import { auth } from "../../firebase";
 
 interface Product {
   id: string;
@@ -39,6 +40,14 @@ export default function AdminCreateInvoice() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [errors, setErrors] = useState<any>({});
+
+    const getAuthHeaders = async () => {
+          const user = auth.currentUser;
+          if (!user) throw new Error("No authenticated user found");
+          const token = await user.getIdToken();
+          return { Authorization: `Bearer ${token}` };
+        };
+    
 
   const validateClient = () => {
   let newErrors: any = {};
@@ -104,7 +113,8 @@ const validateItems = () => {
 
   // Load Products from Backend
   useEffect(() => {
-    fetch("/api/invoice-products")
+    const headers = getAuthHeaders();
+    fetch("/api/invoice-products", { headers })
       .then(res => res.json())
       .then(data => setProducts(data))
       .catch(err => console.error("Failed to load products", err));
@@ -173,10 +183,13 @@ const validateItems = () => {
   setLoading(true);
 
   try {
+    const token = await auth.currentUser?.getIdToken();
+    if (!token) throw new Error("Not authenticated");
     const res = await fetch("/api/invoices/create", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
         ...form,

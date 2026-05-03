@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebase";
 // Import the central API helper you created
 
 type ImageSlotProps = {
@@ -58,6 +59,13 @@ const [Description, setDescription] = useState("");
 const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 const [responseMsg, setResponseMsg] = useState("");
 
+  const getAuthHeaders = async () => {
+        const user = auth.currentUser;
+        if (!user) throw new Error("No authenticated user found");
+        const token = await user.getIdToken();
+        return { Authorization: `Bearer ${token}` };
+      };
+
      // slot 1
 const [imageFile1, setImageFile1] = useState<File | null>(null);
 const [manualImageUrl1, setManualImageUrl1] = useState("");
@@ -86,7 +94,9 @@ const uploadImageIfNeeded = async (
     const formData = new FormData();
     formData.append("image", file);
 
+    const headers = await getAuthHeaders();
     const uploadResponse = await fetch("/api/upload", {
+        headers,
         method: "POST",
         body: formData,
     });

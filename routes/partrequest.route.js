@@ -4,6 +4,8 @@ import {getPartrequests, getPartrequest, createPartrequest, updatePartrequest, d
 const router = express.Router();
 
 
+router.post("/", createPartrequest);
+
 
 router.get('/', getPartrequests);
 

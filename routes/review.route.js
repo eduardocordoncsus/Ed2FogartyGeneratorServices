@@ -2,11 +2,12 @@ import express from "express";
 import Review from "../models/review.model.js"; 
 const router = express.Router();
 import {getReviews, getReview, createReview, updateReview, deleteReview, getPublicReviews} from "../controller/review.controller.js";
+import { verifyFirebaseToken } from '../backend/middleware/auth.ts';
 
 
 router.get("/public", getPublicReviews);
 
-router.get('/', getReviews);
+router.get('/', verifyFirebaseToken, getReviews);
 
 router.get("/:id",getReview);
 

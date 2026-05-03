@@ -1,6 +1,7 @@
 import express from "express";
 import { createInvoice } from "../services/createInvoice.js";
 import { createCustomer } from "../services/createCustomer.js";
+import { verifyFirebaseToken } from '../backend/middleware/auth.ts';
 
 const router = express.Router();
 

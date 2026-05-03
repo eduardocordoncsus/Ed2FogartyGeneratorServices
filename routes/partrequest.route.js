@@ -1,5 +1,6 @@
 import express from "express";
 import Part from '../models/partrequest.model.js';
+import { verifyFirebaseToken } from '../backend/middleware/auth.ts';
 import {getPartrequests, getPartrequest, createPartrequest, updatePartrequest, deletePartrequest,getPendingParts} from '../controller/partrequest.controller.js';
 const router = express.Router();
 
@@ -7,7 +8,7 @@ const router = express.Router();
 router.post("/", createPartrequest);
 
 
-router.get('/', getPartrequests);
+router.get('/', verifyFirebaseToken, getPartrequests);
 
 router.get("/pending-parts", getPendingParts);
 

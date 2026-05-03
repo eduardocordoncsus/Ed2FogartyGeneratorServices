@@ -1,9 +1,10 @@
 import express from "express";
 import { waveRequest } from "../services/waveService.js";
+import { verifyFirebaseToken } from '../backend/middleware/auth.ts';
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", verifyFirebaseToken, async (req, res) => {
   try {
     const query = `
     query ($businessId: ID!, $page: Int!, $pageSize: Int!) {

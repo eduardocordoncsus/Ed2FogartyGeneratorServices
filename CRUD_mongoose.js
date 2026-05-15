@@ -38,7 +38,7 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json()); // Fixes the 400 Bad Request error
 app.use(cookieParser());
 
-// Serve static files from the 'public' folder (from your server.js logic)
+// Serve static files from the 'public' folder (from your server.js logic).
 
 // --- Routes ---
 app.use('/api/admins' , adminRoute);
